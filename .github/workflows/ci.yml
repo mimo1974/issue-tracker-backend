@@ -63,6 +63,19 @@ jobs:
       - name: Run PHPUnit
         run: vendor/bin/phpunit
 
+  hadolint:
+    name: Hadolint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          config: .hadolint.yaml
+
   composer-audit:
     name: Composer Audit
     runs-on: ubuntu-latest
