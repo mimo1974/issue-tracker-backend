@@ -5,3 +5,4 @@ parameters:
 			identifier: method.unused
 			count: 1
 			path: src/Kernel.php
+
