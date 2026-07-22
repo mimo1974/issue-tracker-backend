@@ -1,0 +1,11 @@
+.git
+.github
+var
+vendor
+docs
+tests
+.env.local
+.env.*.local
+.phpunit.cache
+psalm-baseline.xml
+phpstan-baseline.neon
