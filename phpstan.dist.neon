@@ -1,7 +1,10 @@
-includes:
-    - phpstan-baseline.neon
-
 parameters:
     level: 6
     paths:
         - src
+    ignoreErrors:
+        -
+            # Doctrine sets $id via reflection at persist-time (GeneratedValue),
+            # never through application code, so PHPStan never sees an `int` assignment.
+            identifier: property.unusedType
+            path: src/Entity/*.php

@@ -22,6 +22,7 @@ class Kernel extends BaseKernel
      *
      * @psalm-suppress UnusedMethod
      */
+    // @phpstan-ignore method.unused (same trait-flattening call chain as above)
     private function getAllowedEnvs(): array
     {
         return ['prod', 'dev', 'test'];
