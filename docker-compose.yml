@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    ports:
+      - "8080:80"
+    environment:
+      APP_ENV: dev
+      APP_SECRET: dev-secret-change-me
+    volumes:
+      - .:/var/www/html
+      - vendor:/var/www/html/vendor
+      - var:/var/www/html/var
+
+volumes:
+  vendor:
+  var:
