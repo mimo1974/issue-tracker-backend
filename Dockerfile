@@ -2,6 +2,8 @@ FROM composer:2 AS vendor
 
 WORKDIR /app
 
+ENV APP_ENV=prod
+
 COPY composer.json composer.lock symfony.lock ./
 
 RUN composer install \
@@ -67,3 +69,17 @@ RUN { \
         echo 'opcache.validate_timestamps=1'; \
         echo 'opcache.revalidate_freq=0'; \
     } > /usr/local/etc/php/conf.d/opcache-recommended.ini
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        $PHPIZE_DEPS \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN { \
+        echo 'xdebug.mode=debug,develop'; \
+        echo 'xdebug.start_with_request=yes'; \
+        echo 'xdebug.discover_client_host=1'; \
+        echo 'xdebug.client_host=host.docker.internal'; \
+        echo 'xdebug.idekey=PHPSTORM'; \
+    } > /usr/local/etc/php/conf.d/xdebug.ini
