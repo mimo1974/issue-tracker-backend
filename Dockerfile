@@ -71,7 +71,7 @@ RUN { \
     } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        $PHPIZE_DEPS \
+        "$PHPIZE_DEPS" \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
