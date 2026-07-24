@@ -8,10 +8,14 @@ services:
     environment:
       APP_ENV: dev
       APP_SECRET: dev-secret-change-me
+      DATABASE_URL: postgresql://app:!ChangeMe!@database:5432/app?serverVersion=16&charset=utf8
     volumes:
       - .:/var/www/html
       - vendor:/var/www/html/vendor
       - var:/var/www/html/var
+    depends_on:
+      database:
+        condition: service_healthy
 
 ###> doctrine/doctrine-bundle ###
   database:

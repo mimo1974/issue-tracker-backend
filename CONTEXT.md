@@ -5,7 +5,7 @@ A Linear/Jira-style issue tracker: issues are organized into projects and moved 
 ## Language
 
 **User**:
-A person who can access the system. Currently modeled narrowly in code as `Assignee` (id, name, initials) — that type is planned to grow into the full `User` concept, carrying additional profile properties.
+A person who can access the system.
 _Avoid_: Assignee (as the entity name — "assignee" is a role a User plays on an Issue, not the entity itself), Account.
 
 **Auth Identity**:
@@ -27,13 +27,13 @@ The User who created an Issue. Distinct from and independent of the assignee; al
 
 **Label**:
 A first-class, reusable tag entity (id, name, and eventually color) applied to Issues, scoped per-project. Not a freeform string.
-_Avoid_: Tag (as the entity name — kept only as the current field name in code, `tags: string[]`, until migrated).
+_Avoid_: Tag (as the entity name).
 
 **Issue Identity**:
 An Issue's id (e.g. `COR-140`) is the Project's `key` plus a number from a per-project sequence — each Project counts its own issues independently, which is why the key exists (to disambiguate across projects).
 
 **Comment**:
-A first-class entity attached to an Issue, authored by a User, with a body and timestamp. Replaces the current bare `commentCount` field, which is a placeholder.
+A first-class entity attached to an Issue, authored by a User, with a body and timestamp.
 
 **Status**:
 The workflow stage of an Issue (`backlog`, `todo`, `in-progress`, `in-review`, `done`), rendered as a board column. Single global workflow shared by all Projects — not per-project configurable.

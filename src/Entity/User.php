@@ -9,11 +9,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\HasLifecycleCallbacks]
-class User
+class User implements UserInterface
 {
     use TimestampableTrait;
 
@@ -112,5 +113,22 @@ class User
     public function getComments(): Collection
     {
         return $this->comments;
+    }
+
+    /** @return list<string> */
+    #[\Override]
+    public function getRoles(): array
+    {
+        return ['ROLE_USER'];
+    }
+
+    #[\Override]
+    public function getUserIdentifier(): string
+    {
+        if (null === $this->id) {
+            throw new \LogicException('Cannot get the user identifier of a User that has not been persisted yet.');
+        }
+
+        return (string) $this->id;
     }
 }

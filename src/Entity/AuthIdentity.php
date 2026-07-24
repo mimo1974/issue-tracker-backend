@@ -10,6 +10,9 @@ use App\Repository\AuthIdentityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AuthIdentityRepository::class)]
+#[ORM\Table]
+#[ORM\UniqueConstraint(name: 'uniq_auth_identity_provider_provider_user_id', columns: ['provider', 'provider_user_id'])]
+#[ORM\UniqueConstraint(name: 'uniq_auth_identity_provider_email', columns: ['provider', 'email'])]
 #[ORM\HasLifecycleCallbacks]
 class AuthIdentity
 {
@@ -35,6 +38,9 @@ class AuthIdentity
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'authIdentities')]
     #[ORM\JoinColumn(nullable: false)]
     private User $user;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $lastLoginAt = null;
 
     public function __construct(User $user, AuthProvider $provider)
     {
@@ -90,5 +96,15 @@ class AuthIdentity
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    public function getLastLoginAt(): ?\DateTimeImmutable
+    {
+        return $this->lastLoginAt;
+    }
+
+    public function setLastLoginAt(): void
+    {
+        $this->lastLoginAt = new \DateTimeImmutable();
     }
 }

@@ -8,7 +8,6 @@ use App\Entity\Enum\IssuePriority;
 use App\Entity\Enum\IssueStatus;
 use App\Entity\Trait\TimestampableTrait;
 use App\Repository\IssueRepository;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -43,7 +42,7 @@ class Issue
     private IssuePriority $priority;
 
     #[ORM\Column(nullable: true)]
-    private ?DateTimeImmutable $dueDate = null;
+    private ?\DateTimeImmutable $dueDate = null;
 
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'issues')]
     #[ORM\JoinColumn(nullable: false)]
@@ -128,12 +127,12 @@ class Issue
         $this->priority = $priority;
     }
 
-    public function getDueDate(): ?DateTimeImmutable
+    public function getDueDate(): ?\DateTimeImmutable
     {
         return $this->dueDate;
     }
 
-    public function setDueDate(?DateTimeImmutable $dueDate): void
+    public function setDueDate(?\DateTimeImmutable $dueDate): void
     {
         $this->dueDate = $dueDate;
     }
