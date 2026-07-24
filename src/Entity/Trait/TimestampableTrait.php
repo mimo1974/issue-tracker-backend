@@ -4,49 +4,48 @@ declare(strict_types=1);
 
 namespace App\Entity\Trait;
 
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 trait TimestampableTrait
 {
     #[ORM\Column]
-    private DateTimeImmutable $createdAt;
+    private \DateTimeImmutable $createdAt;
 
     #[ORM\Column]
-    private DateTimeImmutable $updatedAt;
+    private \DateTimeImmutable $updatedAt;
 
     #[ORM\Column(nullable: true)]
-    private ?DateTimeImmutable $deletedAt = null;
+    private ?\DateTimeImmutable $deletedAt = null;
 
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): DateTimeImmutable
+    public function getUpdatedAt(): \DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    public function getDeletedAt(): ?DateTimeImmutable
+    public function getDeletedAt(): ?\DateTimeImmutable
     {
         return $this->deletedAt;
     }
 
     public function isDeleted(): bool
     {
-        return $this->deletedAt !== null;
+        return null !== $this->deletedAt;
     }
 
     public function markDeleted(): void
     {
-        $this->deletedAt = new DateTimeImmutable();
+        $this->deletedAt = new \DateTimeImmutable();
     }
 
     #[ORM\PrePersist]
     public function onPrePersistTimestamps(): void
     {
-        $now = new DateTimeImmutable();
+        $now = new \DateTimeImmutable();
         $this->createdAt = $now;
         $this->updatedAt = $now;
     }
@@ -54,6 +53,6 @@ trait TimestampableTrait
     #[ORM\PreUpdate]
     public function onPreUpdateTimestamps(): void
     {
-        $this->updatedAt = new DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }

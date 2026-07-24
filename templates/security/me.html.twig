@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Signed in{% endblock %}
+
+{% block body %}
+    <div class="grid h-screen place-items-top">
+        <div>
+            <div class="flex justify-center mb-2 font-bold"><h1>Sign in to Issue Tracker</h1></div>
+            <div class="flex  justify-center">
+                <p>UserId {{ user.id }} &mdash; {{ user.name }} ({{ user.initials }})</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

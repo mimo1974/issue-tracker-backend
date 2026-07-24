@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+    --color-background: #0d0d13;
+    --color-foreground: #e4e4e9;
+    --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+
+    --color-google-text-gray: #3c4043;
+    --color-google-button-blue: #1a73e8;
+    --color-google-button-blue-hover: #5195ee;
+    --color-google-button-dark: #202124;
+    --color-google-button-dark-hover: #555658;
+    --color-google-button-border-light: #dadce0;
+    --color-google-logo-blue: #4285f4;
+    --color-google-logo-green: #34a853;
+    --color-google-logo-yellow: #fbbc05;
+    --color-google-logo-red: #ea4335;
+}
+
+:root {
+    color-scheme: dark;
+}
+
+body {
+    margin: 0;
+    background: #0d0d13;
+    color: #e4e4e9;
+    font: 14px/1.5 system-ui, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+#root {
+    min-height: 100svh;
+}
+
+button:hover {
+    cursor: pointer;
+}
+

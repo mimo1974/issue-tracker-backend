@@ -41,7 +41,7 @@ All entities carry `createdAt`, `updatedAt`, `deletedAt` (soft-delete — see [A
 
 ## Issue
 
-- `id` (Project `key` + per-project sequence number), `title`, `status` (`backlog` | `todo` | `in_progress` | `in_review` | `done`), `priority` (`low` | `medium` | `high` | `urgent`), `dueDate` (nullable)
+- `id` (Project `key` + per-project sequence number), `title`, `status` (`backlog` | `todo` | `in-progress` | `in-review` | `done` — matches the FE's `Status` type), `priority` (`low` | `medium` | `high` | `urgent`), `dueDate` (nullable)
 - n:1 → `Project` (required)
 - n:1 → `User` as assignee (nullable)
 - n:1 → `User` as reporter (required)
